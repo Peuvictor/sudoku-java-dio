@@ -1,90 +1,148 @@
-# 🧩 Sudoku em Java — Desafio DIO
+# 🧩 Sudoku em Java | Desafio DIO
 
-Projeto desenvolvido como parte de um desafio prático do Bootcamp da **Digital Innovation One (DIO)**.
+Jogo de Sudoku desenvolvido em **Java** para o desafio prático da **Digital Innovation One (DIO)**. O projeto começou com uma versão de terminal e foi ampliado com uma **interface gráfica em Java Swing**, navegação pelo teclado, cronômetro e acompanhamento do progresso.
 
-O objetivo é implementar um jogo de Sudoku executado no terminal, aplicando os fundamentos de Java e Programação Orientada a Objetos.
+## 🖥️ Interface gráfica
 
-## Funcionalidades
+### Tabuleiro e verificação de erros
 
-- Exibição do tabuleiro 9 × 9 no terminal.
-- Carregamento do jogo por argumentos de execução.
-- Inserção de números nas casas disponíveis.
-- Remoção de números inseridos.
-- Proteção das posições fixas.
-- Verificação de erros e do progresso da partida.
-- Validação da conclusão do jogo.
-- Reinicialização do tabuleiro com confirmação.
-- Menu interativo para o jogador.
+![Tabuleiro do Sudoku com números fixos, casas editáveis e destaque de erro](docs/images/sudoku-tabuleiro.png)
 
-## Tecnologias utilizadas
+### Jogo concluído
 
-- Java
-- Programação Orientada a Objetos (POO)
-- IntelliJ IDEA
-- Git e GitHub
+![Sudoku finalizado com mensagem de vitória, cronômetro e progresso](docs/images/sudoku-vitoria.png)
 
-O projeto utiliza Java puro, sem dependências externas.
+## ✨ Funcionalidades
 
-## Estrutura do projeto
+- Tabuleiro **9 × 9**, organizado em blocos **3 × 3**.
+- Números fixos protegidos contra alterações.
+- Inserção, substituição e remoção de números.
+- Verificação de erros com destaque visual nas casas incorretas.
+- Verificação da conclusão do tabuleiro e mensagem de vitória.
+- Reinício da partida com confirmação.
+- Seleção de casas pelo mouse e movimentação pelas setas do teclado.
+- Digitação direta de números de **1 a 9**; remoção com **Backspace** ou **Delete**.
+- **Cronômetro** de partida, interrompido após a vitória.
+- **Contador de progresso** de casas editáveis preenchidas.
+- Versão alternativa executada no **terminal**, com menu interativo.
 
-- `src/Main.java` — ponto de entrada da aplicação e menu interativo.
-- `src/model/Space.java` — representa uma casa do Sudoku.
-- `src/model/Board.java` — gerencia o tabuleiro e as regras do jogo.
-- `src/BoardTest.java` — executa verificações automatizadas das funcionalidades.
-- `arguments.txt` — contém os argumentos para inicializar o Sudoku.
+> **Como funciona a validação:** o projeto usa os valores esperados fornecidos na configuração do desafio para identificar respostas incorretas. Não implementa um solucionador genérico para qualquer grade de Sudoku.
 
-## Como executar
+## 🛠️ Tecnologias
 
-1. Clone o repositório ou baixe o código-fonte.
-2. Abra o projeto no IntelliJ IDEA.
-3. Configure um JDK compatível.
-4. Acesse **Run → Edit Configurations**.
-5. Na configuração da classe `Main`, cole no campo **Program arguments** os 81 argumentos disponíveis em `arguments.txt`.
-6. Execute o método `main()` da classe `Main`.
+- **Java 25** (versão utilizada durante o desenvolvimento)
+- **Java Swing** e AWT para a interface gráfica
+- **Java SE** para a lógica do jogo e os testes simples
+- **IntelliJ IDEA**, **Git** e **GitHub**
+- **WSL2/Ubuntu** durante o desenvolvimento
 
-O tabuleiro será carregado e o menu interativo aparecerá no terminal.
+O projeto não utiliza Spring Boot nem bibliotecas externas para criar a interface.
 
-## Menu do jogo
+## 🚀 Como executar
 
-| Opção | Funcionalidade |
-|---|---|
-| 1 | Mostrar tabuleiro |
-| 2 | Inserir número |
-| 3 | Remover número |
-| 4 | Verificar status do jogo |
-| 5 | Finalizar jogo |
-| 6 | Reiniciar partida |
-| 0 | Sair |
+### Pré-requisitos
 
-## Testes
+- Um **JDK 21 ou superior** instalado (desenvolvido com Java 25).
+- **IntelliJ IDEA** ou outro ambiente Java.
+- Ambiente gráfico disponível para executar a versão Swing. No WSL2, é necessário ter o **WSLg** habilitado.
 
-O projeto possui a classe `BoardTest`, que executa verificações automatizadas usando Java puro, sem JUnit.
+### 1. Clonar o repositório
 
-Os testes incluem identificação de números incorretos, correção de valores, conclusão do tabuleiro e reinicialização preservando as casas fixas.
+```bash
+git clone https://github.com/Peuvictor/sudoku-java-dio.git
+cd sudoku-java-dio
+```
 
-Para executá-los, basta rodar o método `main()` da classe `BoardTest`.
+### 2. Executar a interface gráfica no IntelliJ
 
-## Conceitos praticados
+1. Abra a pasta do projeto no IntelliJ IDEA.
+2. Configure o JDK em **File → Project Structure → Project → SDK**.
+3. Confira se `arguments.txt` está na raiz do projeto.
+4. Abra `src/GuiMain.java` e execute o método `main()`.
+5. Se necessário, ajuste o **Working directory** na configuração de execução para a raiz do projeto.
 
-- Classes e objetos
-- Encapsulamento
-- Construtores
-- Métodos e atributos
-- Matrizes bidimensionais
-- Estruturas condicionais e de repetição
-- Manipulação de Strings
-- Tratamento de exceções
-- Validação de dados
-- Versionamento com Git
+A classe `GuiMain` lê as 81 posições de `arguments.txt` e abre a janela gráfica.
 
-## Referência
+### 3. Executar pelo terminal Linux / WSL2 (opcional)
 
-Projeto baseado no desafio de Sudoku da Digital Innovation One.
+Na raiz do repositório:
 
-Repositório original: https://github.com/digitalinnovationone/sudoku
+```bash
+mkdir -p out
+javac -encoding UTF-8 -d out src/model/*.java src/ui/*.java src/Main.java src/GuiMain.java src/BoardTest.java
+java -cp out GuiMain
+```
 
-## Autor
+Para iniciar a **versão de terminal** usando os mesmos argumentos:
 
-Desenvolvido por **Peuvictor** como parte dos estudos em desenvolvimento Java.
+```bash
+java -cp out Main $(cat arguments.txt)
+```
 
-GitHub: https://github.com/Peuvictor
+> A versão gráfica precisa de display gráfico ativo. Se estiver usando WSL2 e ocorrer `HeadlessException`, confira o suporte WSLg e a variável `DISPLAY`.
+
+## 🎮 Controles da interface gráfica
+
+| Ação | Como utilizar |
+| --- | --- |
+| Selecionar uma casa | Clicar em uma casa editável |
+| Mover a seleção | Setas `↑` `↓` `←` `→` (pulam casas fixas) |
+| Inserir ou substituir um número | Teclas `1` a `9` |
+| Apagar um número | `Backspace` ou `Delete` |
+| Conferir respostas | Botão **Verificar jogo** |
+| Finalizar a partida | Botão **Concluir** |
+| Recomeçar | Botão **Reiniciar jogo** |
+
+## 📁 Estrutura do projeto
+
+```text
+sudoku-java-dio/
+├── src/
+│   ├── model/
+│   │   ├── Board.java          # Estado e operações do tabuleiro
+│   │   └── Space.java          # Uma casa do Sudoku
+│   ├── ui/
+│   │   └── SudokuFrame.java    # Interface gráfica Swing
+│   ├── Main.java               # Entrada da versão de terminal
+│   ├── GuiMain.java            # Entrada da versão gráfica
+│   └── BoardTest.java          # Verificações automatizadas em Java puro
+├── docs/
+│   └── images/
+│       ├── sudoku-tabuleiro.png
+│       └── sudoku-vitoria.png
+├── arguments.txt               # Configuração das 81 casas
+├── .gitignore
+└── README.md
+```
+
+## ✅ Testes
+
+A classe `BoardTest` valida a lógica principal sem depender de JUnit. Os cenários cobertos incluem:
+
+- Tabuleiro inicialmente incompleto e sem erros.
+- Identificação e correção de respostas incorretas.
+- Preenchimento completo e validação da vitória.
+- Reinício da partida mantendo as casas fixas.
+
+Para executar no IntelliJ, rode `BoardTest.main()`; ou, depois da compilação pelo terminal:
+
+```bash
+java -cp out BoardTest
+```
+
+## 📚 Conceitos praticados
+
+Programação orientada a objetos (classes, construtores e encapsulamento), matrizes bidimensionais, condicionais, laços, `String.split`, conversão de dados, eventos e componentes Swing, atalhos de teclado, tratamento de entradas e versionamento com Git.
+
+## 🔗 Referência
+
+Desafio e projeto de referência da **Digital Innovation One**:
+- [Sudoku DIO — versão de terminal](https://github.com/digitalinnovationone/sudoku)
+- [Sudoku DIO — versão gráfica](https://github.com/digitalinnovationone/sudoku/tree/ui)
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Peuvictor** como projeto de estudo e portfólio.
+
+- GitHub: [@Peuvictor](https://github.com/Peuvictor)
+- Repositório: [sudoku-java-dio](https://github.com/Peuvictor/sudoku-java-dio)
