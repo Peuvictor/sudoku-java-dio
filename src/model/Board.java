@@ -122,5 +122,20 @@ public class Board {
         return true;
     }
 
+    public void resetBoard() {
+
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+
+                Space space = spaces[row][column];
+
+                if (space != null && !space.isFixed()) {
+                    space.clearSpace();
+                }
+            }
+        }
+    }
+
+
 
 }

@@ -57,6 +57,7 @@ public class Main {
             System.out.println("3 - Remover numero");
             System.out.println("4 - Verificar status do jogo");
             System.out.println("5 - Finalizar jogo");
+            System.out.println("6 - Reiniciar partida");
             System.out.println("0 - Sair");
 
             System.out.print("Escolha uma opcao: ");
@@ -114,6 +115,27 @@ public class Main {
                         running = false;
                     }
                 }
+
+                case "6" -> {
+
+                    System.out.print(
+                            "Tem certeza que deseja reiniciar? (s/n): "
+                    );
+
+                    String confirmation = scanner.nextLine().trim();
+
+                    if (confirmation.equalsIgnoreCase("s")) {
+
+                        board.resetBoard();
+
+                        System.out.println("Partida reiniciada!");
+                        board.showBoard();
+
+                    } else {
+                        System.out.println("Reinicio cancelado!");
+                    }
+                }
+
 
                 case "0" -> {
                     System.out.println("Ate a proxima!");
